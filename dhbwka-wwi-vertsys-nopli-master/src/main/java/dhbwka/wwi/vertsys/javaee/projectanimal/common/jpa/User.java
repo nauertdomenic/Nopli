@@ -1,6 +1,6 @@
 package dhbwka.wwi.vertsys.javaee.projectanimal.common.jpa;
 
-import dhbwka.wwi.vertsys.javaee.projectanimal.tasks.jpa.Tierart;
+
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import projectanimal.whatever.jpa.Tierart;
 
 /**
  * Datenbankklasse für einen Benutzer.

@@ -1,27 +1,29 @@
-package dhbwka.wwi.vertsys.javaee.projectanimal.tasks.web;
+/*
+ * Copyright © 2019 Dennis Schulmeister-Zimolong
+ * 
+ * E-Mail: dhbw@windows3.de
+ * Webseite: https://www.wpvs.de/
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ */
+package projectanimal.whatever.web;
 
-import dhbwka.wwi.vertsys.javaee.projectanimal.common.web.WebUtils;
+import dhbwka.wwi.vertsys.javaee.projectanimal.common.ejb.*;
 import dhbwka.wwi.vertsys.javaee.projectanimal.common.web.FormValues;
-import dhbwka.wwi.vertsys.javaee.projectanimal.tasks.ejb.SpeziesBean;
-import dhbwka.wwi.vertsys.javaee.projectanimal.tasks.ejb.TierartBean;
-import dhbwka.wwi.vertsys.javaee.projectanimal.common.ejb.UserBean;
-import dhbwka.wwi.vertsys.javaee.projectanimal.common.ejb.ValidationBean;
-import dhbwka.wwi.vertsys.javaee.projectanimal.tasks.jpa.Tierart;
+import dhbwka.wwi.vertsys.javaee.projectanimal.common.web.WebUtils;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.ejb.EJB;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+import projectanimal.whatever.ejb.*;
+import projectanimal.whatever.jpa.Tierart;
 
 /**
- * Seite zum Anlegen oder Bearbeiten einer Tierart.
+ *
+ * @author simon
  */
 @WebServlet(urlPatterns = "/app/tierarten/tierart/*")
 public class TierartEditServlet extends HttpServlet {

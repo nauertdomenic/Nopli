@@ -1,20 +1,28 @@
-package dhbwka.wwi.vertsys.javaee.projectanimal.tasks.web;
+/*
+ * Copyright © 2019 Dennis Schulmeister-Zimolong
+ * 
+ * E-Mail: dhbw@windows3.de
+ * Webseite: https://www.wpvs.de/
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ */
+package projectanimal.whatever.web;
 
-import dhbwka.wwi.vertsys.javaee.projectanimal.tasks.ejb.SpeziesBean;
-import dhbwka.wwi.vertsys.javaee.projectanimal.tasks.ejb.TierartBean;
-import dhbwka.wwi.vertsys.javaee.projectanimal.tasks.jpa.Spezies;
-import dhbwka.wwi.vertsys.javaee.projectanimal.tasks.jpa.Tierart;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
+import projectanimal.whatever.ejb.SpeziesBean;
+import projectanimal.whatever.ejb.TierartBean;
+import projectanimal.whatever.jpa.Spezies;
+import projectanimal.whatever.jpa.Tierart;
 
 /**
- * Servlet für die tabellarische Auflisten der Tierarten.
+ *
+ * @author simon
  */
 @WebServlet(urlPatterns = {"/app/tierarten/list/"})
 public class TierartListServlet extends HttpServlet {

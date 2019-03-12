@@ -1,13 +1,23 @@
-package dhbwka.wwi.vertsys.javaee.projectanimal.tasks.ejb;
+/*
+ * Copyright © 2019 Dennis Schulmeister-Zimolong
+ * 
+ * E-Mail: dhbw@windows3.de
+ * Webseite: https://www.wpvs.de/
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ */
+package projectanimal.whatever.ejb;
 
 import dhbwka.wwi.vertsys.javaee.projectanimal.common.ejb.EntityBean;
-import dhbwka.wwi.vertsys.javaee.projectanimal.tasks.jpa.Spezies;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import projectanimal.whatever.jpa.Spezies;
 
 /**
- * Einfache EJB mit den üblichen CRUD-Methoden für Spezies.
+ *
+ * @author simon
  */
 @Stateless
 @RolesAllowed("app-user")
@@ -26,3 +36,4 @@ public class SpeziesBean extends EntityBean<Spezies, Long> {
         return this.em.createQuery("SELECT c FROM Spezies c ORDER BY c.name").getResultList();
     }
 }
+
