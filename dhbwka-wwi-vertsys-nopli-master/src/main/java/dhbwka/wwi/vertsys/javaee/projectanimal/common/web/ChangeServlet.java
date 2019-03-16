@@ -32,17 +32,21 @@ public class ChangeServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        System.out.println("Im POST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         HttpSession session = request.getSession();
         
         String fehler = "";
         String vorname = request.getParameter("change_vorname");
         String nachname = request.getParameter("change_nachname");
+        String username = request.getParameter("change_username");
         
         if (vorname == null || vorname.trim().isEmpty()) {
             fehler = "Bitte gib erst deinen Namen ein.";
             session.setAttribute("fehler", fehler);
             session.setAttribute("change_vorname", vorname);
             session.setAttribute("change_nachname", nachname);
+            session.setAttribute("change_username", username);
         }
         
         // Neuen Eintrag speichern
@@ -50,6 +54,7 @@ public class ChangeServlet extends HttpServlet {
             User user = userBean.getCurrentUser();
             user.setVorname(vorname);
             user.setNachname(nachname);
+            user.setUsername(username);
             
             System.out.println(user.getPassword());
             
