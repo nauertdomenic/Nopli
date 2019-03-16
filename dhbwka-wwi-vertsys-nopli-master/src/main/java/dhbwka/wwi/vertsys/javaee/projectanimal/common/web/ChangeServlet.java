@@ -5,6 +5,8 @@ import dhbwka.wwi.vertsys.javaee.projectanimal.common.ejb.ValidationBean;
 import dhbwka.wwi.vertsys.javaee.projectanimal.common.jpa.User;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,12 +40,14 @@ public class ChangeServlet extends HttpServlet {
         String fehler = "";
         String vorname = request.getParameter("change_vorname");
         String nachname = request.getParameter("change_nachname");
+        String passwort = request.getParameter("change_password");
         
         if (vorname == null || vorname.trim().isEmpty()) {
             fehler = "Bitte gib erst deinen Namen ein.";
             session.setAttribute("fehler", fehler);
             session.setAttribute("change_vorname", vorname);
             session.setAttribute("change_nachname", nachname);
+            session.setAttribute("change_password", passwort);
         }
         
         // Neuen Eintrag speichern
@@ -51,9 +55,14 @@ public class ChangeServlet extends HttpServlet {
             User user = userBean.getCurrentUser();
             user.setVorname(vorname);
             user.setNachname(nachname);
+                       
+            User.Password altesPasswort = user.getPassword();
             
-            System.out.println(user.getPassword());
-            
+            try {
+                this.userBean.changePassword(user, altesPasswort.password, passwort);
+            } catch (UserBean.InvalidCredentialsException ex) {
+                Logger.getLogger(ChangeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.userBean.update(user);
         }
         
