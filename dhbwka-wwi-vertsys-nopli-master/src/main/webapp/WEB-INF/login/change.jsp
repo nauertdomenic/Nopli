@@ -38,9 +38,7 @@
         <div>
             <form method="POST">
                 <input type="text" name="change_vorname" placeholder="${current_user.vorname}">
-                <input type="text" name="change_nachname" placeholder="${current_user.nachname}">
-                <input type="text" name="change_username" placeholder="${current_user.username}">
-            
+                <input type="text" name="change_nachname" placeholder="${current_user.nachname}">            
                 <button type="submit">Send</button>
             </form>
         </div>
