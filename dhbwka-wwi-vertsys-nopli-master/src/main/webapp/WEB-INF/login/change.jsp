@@ -41,7 +41,7 @@
                 <input type="text" name="change_nachname" placeholder="${current_user.nachname}"> 
                 <input type="text" name="change_old_password" placeholder="altes Passwort">
                 <input type="text" name="change_new_password" placeholder="neues Passwort">
-                <input type="text" name="change_new1_password" placeholder="neues wiederholen Passwort">
+                <input type="text" name="change_new1_password" placeholder="neues Passwort wiederholen">
                 <button type="submit">Send</button>
             </form>
         </div>

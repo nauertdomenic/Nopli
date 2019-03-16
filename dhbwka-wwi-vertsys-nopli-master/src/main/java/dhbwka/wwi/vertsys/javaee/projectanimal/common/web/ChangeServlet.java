@@ -40,14 +40,18 @@ public class ChangeServlet extends HttpServlet {
         String fehler = "";
         String vorname = request.getParameter("change_vorname");
         String nachname = request.getParameter("change_nachname");
-        String passwort = request.getParameter("change_password");
+        String passwort1 = request.getParameter("change_new_password");
+        String passwort2 = request.getParameter("change_new1_password");
+        String altesPasswort = request.getParameter("change_old_password");
         
         if (vorname == null || vorname.trim().isEmpty()) {
             fehler = "Bitte gib erst deinen Namen ein.";
             session.setAttribute("fehler", fehler);
             session.setAttribute("change_vorname", vorname);
             session.setAttribute("change_nachname", nachname);
-            session.setAttribute("change_password", passwort);
+            session.setAttribute("change_old_password", altesPasswort);
+            session.setAttribute("change_new_password", passwort1);
+            session.setAttribute("change_new1_password", passwort2);
         }
         
         // Neuen Eintrag speichern
@@ -55,11 +59,9 @@ public class ChangeServlet extends HttpServlet {
             User user = userBean.getCurrentUser();
             user.setVorname(vorname);
             user.setNachname(nachname);
-                       
-            User.Password altesPasswort = user.getPassword();
             
             try {
-                this.userBean.changePassword(user, altesPasswort.password, passwort);
+                this.userBean.changePassword(user, altesPasswort, passwort1);
             } catch (UserBean.InvalidCredentialsException ex) {
                 Logger.getLogger(ChangeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
