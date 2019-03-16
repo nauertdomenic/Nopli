@@ -32,48 +32,32 @@ public class ChangeServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         
-        // Formulareingaben auslesen        
-        String username = request.getParameter("change_username");
-        String password1 = request.getParameter("change_password1");
-        String password2 = request.getParameter("change_password2");
+        String fehler = "";
         String vorname = request.getParameter("change_vorname");
         String nachname = request.getParameter("change_nachname");
         
-        // Eingaben prüfen
-        User user = new User(username, password1, vorname, nachname);
-        List<String> errors = this.validationBean.validate(user);
-        this.validationBean.validate(user.getPassword(), errors);
-        
-        if (password1 != null && password2 != null && !password1.equals(password2)) {
-            errors.add("Die beiden Passwörter stimmen nicht überein.");
+        if (vorname == null || vorname.trim().isEmpty()) {
+            fehler = "Bitte gib erst deinen Namen ein.";
+            session.setAttribute("fehler", fehler);
+            session.setAttribute("change_vorname", vorname);
+            session.setAttribute("change_nachname", nachname);
         }
         
-        // Neuen Benutzer anlegen
-        if (errors.isEmpty()) {
-            try {
-                this.userBean.signup(username, password1, vorname, nachname);
-            } catch (UserBean.UserAlreadyExistsException ex) {
-                errors.add(ex.getMessage());
-            }
-        }
-        
-        // Weiter zur nächsten Seite
-        if (errors.isEmpty()) {
-            // Keine Fehler: Startseite aufrufen
-            request.login(username, password1);
-            response.sendRedirect(WebUtils.appUrl(request, "/app/dashboard/"));
-        } else {
-            // Fehler: Formuler erneut anzeigen
-            FormValues formValues = new FormValues();
-            formValues.setValues(request.getParameterMap());
-            formValues.setErrors(errors);
+        // Neuen Eintrag speichern
+        if (fehler.isEmpty()) {
+            User user = userBean.getCurrentUser();
+            user.setVorname(vorname);
+            user.setNachname(nachname);
             
-            HttpSession session = request.getSession();
-            session.setAttribute("change_form", formValues);
+            System.out.println(user.getPassword());
             
-            response.sendRedirect(request.getRequestURI());
+            this.userBean.update(user);
         }
+        
+        // Browser auffordern, die Seite neuzuladen
+        response.sendRedirect(request.getContextPath());
     }
     
     
@@ -81,13 +65,12 @@ public class ChangeServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        User user = userBean.getCurrentUser();
+        
         // Verfügbare Spezies und Stati für die Suchfelder ermitteln
-        request.setAttribute("current_user", this.userBean.getCurrentUser());
+        request.setAttribute("current_user", user);
        
         // Anzuzeigende Aufgaben suchen
-        User user;
-        user = this.userBean.getCurrentUser();
-        request.setAttribute("user", user);
         request.setAttribute("change_vorname", user.getVorname());
         request.setAttribute("change_nachname", user.getNachname());
         request.setAttribute("change_username", user.getUsername());

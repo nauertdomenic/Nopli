@@ -32,53 +32,16 @@
     </jsp:attribute>
 
     <jsp:attribute name="content">
-        <div class="container">
-            <form method="post" class="stacked">
-                <div class="column">
-                    <%-- CSRF-Token --%>
+        <%-- CSRF-Token --%>
                     <input type="hidden" name="csrf_token" value="${csrf_token}">
-
-                    <%-- Eingabefelder --%>
-                    <label for="change_vorname">
-                        Vorname:
-                        <span class="required">*</span>
-                    </label>
-                    <div class="side-by-side">
-                        <input type="text" name="change_vorname" value="${change_form.values["change_vorname"][0]}">
-                    </div>
-                    
-                    <label for="change_nachname">
-                        Nachname:
-                        <span class="required">*</span>
-                    </label>
-                    <div class="side-by-side">
-                        <input type="text" name="change_nachname" value="${change_form.values["change_nachname"][0]}">
-                    </div>
-                    
-                    <label for="change_username">
-                        Benutzername:
-                        <span class="required">*</span>
-                    </label>
-                    <div class="side-by-side">
-                        <input type="text" name="change_username" value="${change_form.values["change_username"][0]}">
-                    </div>
-
-                    <%-- Button zum Abschicken --%>
-                    <div class="side-by-side">
-                        <button class="icon-pencil" type="submit">
-                            Ändern
-                        </button>
-                    </div>
-                </div>
-
-                <%-- Fehlermeldungen --%>
-                <c:if test="${!empty change_form.errors}">
-                    <ul class="errors">
-                        <c:forEach items="${change_form.errors}" var="error">
-                            <li>${error}</li>
-                            </c:forEach>
-                    </ul>
-                </c:if>
+        
+        <div>
+            <form method="POST">
+                <input type="text" name="change_vorname" placeholder="${current_user.vorname}">
+                <input type="text" name="change_nachname" placeholder="${current_user.nachname}">
+                <input type="text" name="change_username" placeholder="${current_user.username}">
+            
+                <button type="submit">Send</button>
             </form>
         </div>
     </jsp:attribute>
