@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -32,6 +33,11 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
 
+    @Column(name = "USERID")
+    @NotNull
+    @GeneratedValue
+    private long userid;
+    
     @Id
     @Column(name = "USERNAME", length = 64)
     @Size(min = 5, max = 64, message = "Der Benutzername muss zwischen fünf und 64 Zeichen lang sein.")
