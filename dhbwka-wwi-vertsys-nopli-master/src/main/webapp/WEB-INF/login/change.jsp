@@ -32,17 +32,66 @@
     </jsp:attribute>
 
     <jsp:attribute name="content">
-        <%-- CSRF-Token --%>
+        <div class="container">
+            <form method="post" class="stacked">
+                <div class="column">
+                    <%-- CSRF-Token --%>
                     <input type="hidden" name="csrf_token" value="${csrf_token}">
-        
-        <div>
-            <form method="POST">
-                <input type="text" name="change_vorname" placeholder="${current_user.vorname}">
-                <input type="text" name="change_nachname" placeholder="${current_user.nachname}"> 
-                <input type="text" name="change_old_password" placeholder="altes Passwort">
-                <input type="text" name="change_new_password" placeholder="neues Passwort">
-                <input type="text" name="change_new1_password" placeholder="neues Passwort wiederholen">
-                <button type="submit">Send</button>
+
+                    <%-- Eingabefelder --%>
+                    <label for="change_vorname">
+                        Vorname:
+                    </label>
+                    <div class="side-by-side">
+                        <input type="text" name="change_vorname" placeholder="${current_user.vorname}">
+                    </div>
+                    
+                    <label for="change_nachname">
+                        Nachname:
+                    </label>
+                    <div class="side-by-side">
+                        <input type="text" name="change_nachname" placeholder="${current_user.nachname}"> 
+                    </div>
+                    
+                    <label for="change_old_password">
+                        Altes Passwort:
+                    </label>
+                    <div class="side-by-side">
+                        <input type="password" name="change_old_password" placeholder="altes Passwort">
+                    </div>
+
+                    <label for="change_new_password">
+                        Passwort:
+                    </label>
+                    <div class="side-by-side">
+                        <input type="password" name="change_new_passwort1" placeholder="neues Passwort">
+                    </div>
+
+                    <label for="change_new1_password">
+                        Passwort (wdh.):
+                    </label>
+                    <div class="side-by-side">
+                        <input type="password" name="change_new_passwort2" placeholder="neues Passwort wiederholen">
+                    </div>
+
+                    <br>
+                    
+                    <%-- Button zum Abschicken --%>
+                    <div class="side-by-side">
+                        <button class="icon-pencil" type="submit">
+                            Ändern
+                        </button>
+                    </div>
+                </div>
+
+                <%-- Fehlermeldungen --%>
+                <c:if test="${!empty signup_form.errors}">
+                    <ul class="errors">
+                        <c:forEach items="${signup_form.errors}" var="error">
+                            <li>${error}</li>
+                            </c:forEach>
+                    </ul>
+                </c:if>
             </form>
         </div>
     </jsp:attribute>

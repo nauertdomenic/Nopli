@@ -46,11 +46,11 @@ public class User implements Serializable {
     private String username;
     
     @Column(name = "VORNAME", length = 64)
-    @Size(min = 1, max = 64, message = "Der Vorname muss zwischen 1 und 64 Zeichen lang sein.")
+    @Size(min = 0, max = 64, message = "Der Vorname muss zwischen 1 und 64 Zeichen lang sein.")
     private String vorname;
     
     @Column(name = "NACHNAME", length = 64)
-    @Size(min = 1, max = 64, message = "Der Nachname muss zwischen 1 und 64 Zeichen lang sein.")
+    @Size(min = 0, max = 64, message = "Der Nachname muss zwischen 1 und 64 Zeichen lang sein.")
     private String nachname;
     
     public class Password {

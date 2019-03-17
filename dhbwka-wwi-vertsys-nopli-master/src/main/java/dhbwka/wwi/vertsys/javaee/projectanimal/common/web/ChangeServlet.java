@@ -36,40 +36,56 @@ public class ChangeServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        
-        String fehler = "";
+   
         String vorname = request.getParameter("change_vorname");
         String nachname = request.getParameter("change_nachname");
-        String passwort1 = request.getParameter("change_new_password");
-        String passwort2 = request.getParameter("change_new1_password");
+        String passwort1 = request.getParameter("change_new_passwort1");
+        String passwort2 = request.getParameter("change_new_passwort2");
         String altesPasswort = request.getParameter("change_old_password");
         
-        if (vorname == null || vorname.trim().isEmpty()) {
-            fehler = "Bitte gib erst deinen Namen ein.";
-            session.setAttribute("fehler", fehler);
-            session.setAttribute("change_vorname", vorname);
-            session.setAttribute("change_nachname", nachname);
-            session.setAttribute("change_old_password", altesPasswort);
-            session.setAttribute("change_new_password", passwort1);
-            session.setAttribute("change_new1_password", passwort2);
+        User user = userBean.getCurrentUser();
+        if(vorname != null && !vorname.equals("")){
+            user.setVorname(vorname);   
+        }
+        if(nachname != null && !nachname.equals("")){
+            user.setNachname(nachname);
+        }
+       
+        List<String> errors = this.validationBean.validate(user);
+        if(!user.checkPassword(altesPasswort)){ 
+            errors.add("Das alte Passwort stimmt nicht.");
+        }
+        
+        this.validationBean.validate(passwort1, errors);
+        
+        if(passwort1.length() < 6 || passwort2.length() < 6){
+            errors.add("Das neue Passwort muss zwischen sechs und 64 Zeichen lang sein.");
+        }
+        
+        if (passwort1 != null && passwort2 != null && !passwort1.equals(passwort2)) {
+            errors.add("Die beiden neuen Passwörter stimmen nicht überein.");
         }
         
         // Neuen Eintrag speichern
-        if (fehler.isEmpty()) {
-            User user = userBean.getCurrentUser();
-            user.setVorname(vorname);
-            user.setNachname(nachname);
-            
+        if (errors.isEmpty()) {
             try {
                 this.userBean.changePassword(user, altesPasswort, passwort1);
             } catch (UserBean.InvalidCredentialsException ex) {
                 Logger.getLogger(ChangeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            this.userBean.update(user);
-        }
+           this.userBean.update(user);
+           session.removeAttribute("signup_form");
+           response.sendRedirect(request.getContextPath() + "/app/change/");
+        }else{
+        // Fehler: Formuler erneut anzeigen
+            FormValues formValues = new FormValues();
+            formValues.setValues(request.getParameterMap());
+            formValues.setErrors(errors);
         
-        // Browser auffordern, die Seite neuzuladen
-        response.sendRedirect(request.getContextPath());
+            session.setAttribute("signup_form", formValues);
+            
+            response.sendRedirect(request.getRequestURI());
+        }
     }
     
     
