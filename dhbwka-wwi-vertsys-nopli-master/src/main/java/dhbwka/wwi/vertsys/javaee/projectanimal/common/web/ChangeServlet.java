@@ -44,13 +44,19 @@ public class ChangeServlet extends HttpServlet {
         String altesPasswort = request.getParameter("change_old_password");
         
         User user = userBean.getCurrentUser();
-        if(vorname != null && !vorname.equals("")){
+        if(!vorname.isBlank()){
             user.setVorname(vorname);   
         }
-        if(nachname != null && !nachname.equals("")){
+        if(!nachname.isBlank()){
             user.setNachname(nachname);
         }
        
+        if(passwort1.isEmpty() && passwort2.isEmpty() && altesPasswort.isEmpty()){
+            userBean.update(user);
+            response.sendRedirect(request.getContextPath() + "/app/change/");
+            return;
+        }
+        
         List<String> errors = this.validationBean.validate(user);
         if(!user.checkPassword(altesPasswort)){ 
             errors.add("Das alte Passwort stimmt nicht.");
@@ -58,11 +64,11 @@ public class ChangeServlet extends HttpServlet {
         
         this.validationBean.validate(passwort1, errors);
         
-        if(passwort1.length() < 6 || passwort2.length() < 6){
+        if(passwort1.length() < 6){
             errors.add("Das neue Passwort muss zwischen sechs und 64 Zeichen lang sein.");
         }
         
-        if (passwort1 != null && passwort2 != null && !passwort1.equals(passwort2)) {
+        if (!passwort1.isEmpty() && !passwort2.isEmpty() && !passwort1.equals(passwort2)) {
             errors.add("Die beiden neuen Passwörter stimmen nicht überein.");
         }
         
@@ -74,7 +80,7 @@ public class ChangeServlet extends HttpServlet {
                 Logger.getLogger(ChangeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
            this.userBean.update(user);
-           session.removeAttribute("signup_form");
+           session.removeAttribute("change_form");
            response.sendRedirect(request.getContextPath() + "/app/change/");
         }else{
         // Fehler: Formuler erneut anzeigen
@@ -82,7 +88,7 @@ public class ChangeServlet extends HttpServlet {
             formValues.setValues(request.getParameterMap());
             formValues.setErrors(errors);
         
-            session.setAttribute("signup_form", formValues);
+            session.setAttribute("change_form", formValues);
             
             response.sendRedirect(request.getRequestURI());
         }

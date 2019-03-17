@@ -61,17 +61,17 @@
                     </div>
 
                     <label for="change_new_password">
-                        Passwort:
+                        Neues Passwort:
                     </label>
                     <div class="side-by-side">
                         <input type="password" name="change_new_passwort1" placeholder="neues Passwort">
                     </div>
 
                     <label for="change_new1_password">
-                        Passwort (wdh.):
+                        Neues Passwort (wdh.):
                     </label>
                     <div class="side-by-side">
-                        <input type="password" name="change_new_passwort2" placeholder="neues Passwort wiederholen">
+                        <input type="password" name="change_new_passwort2" placeholder="wiederholen">
                     </div>
 
                     <br>
@@ -85,9 +85,9 @@
                 </div>
 
                 <%-- Fehlermeldungen --%>
-                <c:if test="${!empty signup_form.errors}">
+                <c:if test="${!empty change_form.errors}">
                     <ul class="errors">
-                        <c:forEach items="${signup_form.errors}" var="error">
+                        <c:forEach items="${change_form.errors}" var="error">
                             <li>${error}</li>
                             </c:forEach>
                     </ul>
