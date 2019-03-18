@@ -21,15 +21,15 @@
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/list/"/>">Liste</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/tierart/new/"/>">Tierart anlegen</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/spezies/"/>">Spezies bearbeiten</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/change/"/>">Daten ändern</a>
         </div>
@@ -64,7 +64,7 @@
             </c:when>
             <c:otherwise>
                 <jsp:useBean id="utils" class="dhbwka.wwi.vertsys.javaee.projectanimal.common.web.WebUtils"/>
-                
+
                 <table>
                     <thead>
                         <tr>

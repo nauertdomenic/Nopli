@@ -10,11 +10,11 @@ public class DashboardSection {
 
     private String label = "";
     private List<DashboardTile> tiles = new ArrayList<>();
-    
+
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public DashboardSection() {
     }
-    
+
     public DashboardSection(String label, List<DashboardTile> tiles) {
         this.label = label;
         this.tiles = tiles;
@@ -25,15 +25,15 @@ public class DashboardSection {
     public String getLabel() {
         return label;
     }
-    
+
     public void setLabel(String label) {
         this.label = label;
     }
-    
+
     public List<DashboardTile> getTiles() {
         return tiles;
     }
-    
+
     public void setTiles(List<DashboardTile> tiles) {
         this.tiles = tiles;
     }

@@ -8,25 +8,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet, dass den Anwender ausloggt (die Session beendet) und ihn dann
- * auf die Startseite weiterleitet.
+ * Servlet, dass den Anwender ausloggt (die Session beendet) und ihn dann auf
+ * die Startseite weiterleitet.
  */
 @WebServlet(urlPatterns = {"/logout/"})
 public class LogoutServlet extends HttpServlet {
-    
+
     public static final String URL = "/logout/";
 
     /**
      * GET-Anfrage: Seite anzeigen
-     * 
+     *
      * @param request
      * @param response
      * @throws IOException
-     * @throws ServletException 
+     * @throws ServletException
      */
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws IOException, ServletException {
+            throws IOException, ServletException {
         request.getSession().invalidate();
         response.sendRedirect(WebUtils.appUrl(request, "/"));
     }

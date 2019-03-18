@@ -1,12 +1,3 @@
-/*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
- * 
- * E-Mail: dhbw@windows3.de
- * Webseite: https://www.wpvs.de/
- * 
- * Dieser Quellcode ist lizenziert unter einer
- * Creative Commons Namensnennung 4.0 International Lizenz.
- */
 package projectanimal.whatever.ejb;
 
 import dhbwka.wwi.vertsys.javaee.projectanimal.common.web.WebUtils;
@@ -55,8 +46,8 @@ public class DashboardContent implements DashboardContentProvider {
 
     /**
      * Hilfsmethode, die für die übergebene Tierarten-Spezies eine neue Rubrik
-     * mit Kacheln im Dashboard erzeugt. Zusätzlich eine Kachel für alle Tierarten innerhalb der
-     * jeweiligen Spezies.
+     * mit Kacheln im Dashboard erzeugt. Zusätzlich eine Kachel für alle
+     * Tierarten innerhalb der jeweiligen Spezies.
      *
      * Ist die Spezies null, bedeutet dass, dass eine Rubrik für alle Tierarten
      * aus allen Spezies erzeugt werden soll.
@@ -79,7 +70,7 @@ public class DashboardContent implements DashboardContentProvider {
         // Eine Kachel für alle Tierarten in dieser Rubrik erzeugen
         DashboardTile tile = this.createTile(spezies, "Alle", cssClass + " status-all", "calendar");
         section.getTiles().add(tile);
- 
+
         // Erzeugte Dashboard-Rubrik mit den Kacheln zurückliefern
         return section;
     }

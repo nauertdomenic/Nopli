@@ -1,24 +1,12 @@
 package dhbwka.wwi.vertsys.javaee.projectanimal.common.jpa;
 
-
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import projectanimal.whatever.jpa.Tierart;
@@ -32,28 +20,28 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
-    
-    
+
     @Column(name = "USERID")
     @NotNull
     @GeneratedValue
     private long userid;
-    
+
     @Id
     @Column(name = "USERNAME", length = 64)
     @Size(min = 5, max = 64, message = "Der Benutzername muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Der Benutzername darf nicht leer sein.")
     private String username;
-    
+
     @Column(name = "VORNAME", length = 64)
     @Size(min = 0, max = 64, message = "Der Vorname muss zwischen 1 und 64 Zeichen lang sein.")
     private String vorname;
-    
+
     @Column(name = "NACHNAME", length = 64)
     @Size(min = 0, max = 64, message = "Der Nachname muss zwischen 1 und 64 Zeichen lang sein.")
     private String nachname;
-    
+
     public class Password {
+
         @Size(min = 6, max = 64, message = "Das Passwort muss zwischen sechs und 64 Zeichen lang sein.")
         public String password = "";
     }
@@ -104,20 +92,20 @@ public class User implements Serializable {
     public void setTasks(List<Tierart> tasks) {
         this.tierarten = tasks;
     }
-    
-    public String getVorname(){
+
+    public String getVorname() {
         return this.vorname;
     }
-    
-    public void setVorname(String vorname){
+
+    public void setVorname(String vorname) {
         this.vorname = vorname;
     }
-    
-    public String getNachname(){
+
+    public String getNachname() {
         return this.nachname;
     }
-    
-    public void setNachname(String nachname){
+
+    public void setNachname(String nachname) {
         this.nachname = nachname;
     }
     //</editor-fold>
@@ -161,10 +149,10 @@ public class User implements Serializable {
      * Berechnet einen Hashwert aus dem übergebenen Passwort und legt ihn im
      * Feld passwordHash ab. Somit wird das Passwort niemals als Klartext
      * gespeichert.
-     * 
+     *
      * Gleichzeitig wird das Passwort im nicht gespeicherten Feld password
-     * abgelegt, um durch die Bean Validation Annotationen überprüft werden
-     * zu können.
+     * abgelegt, um durch die Bean Validation Annotationen überprüft werden zu
+     * können.
      *
      * @param password Neues Passwort
      */
@@ -175,12 +163,13 @@ public class User implements Serializable {
 
     /**
      * Nur für die Validierung bei einer Passwortänderung!
+     *
      * @return Neues, beim Speichern gesetztes Passwort
      */
     public Password getPassword() {
         return this.password;
     }
-    
+
     /**
      * Prüft, ob das übergebene Passwort korrekt ist.
      *

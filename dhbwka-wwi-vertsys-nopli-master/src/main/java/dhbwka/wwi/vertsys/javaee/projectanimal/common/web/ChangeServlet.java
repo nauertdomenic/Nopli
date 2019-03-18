@@ -17,61 +17,60 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author phoenix
- /**
- * Servlet für die Registrierungsseite. Hier kann sich ein neuer Benutzer
- * registrieren. Anschließend wird der auf die Startseite weitergeleitet.
+ * @author phoenix /** Servlet für die Registrierungsseite. Hier kann sich ein
+ * neuer Benutzer registrieren. Anschließend wird der auf die Startseite
+ * weitergeleitet.
  */
 @WebServlet(urlPatterns = {"/app/change/"})
 public class ChangeServlet extends HttpServlet {
-    
+
     @EJB
     ValidationBean validationBean;
-            
+
     @EJB
     UserBean userBean;
-    
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
-   
+
         String vorname = request.getParameter("change_vorname");
         String nachname = request.getParameter("change_nachname");
         String passwort1 = request.getParameter("change_new_passwort1");
         String passwort2 = request.getParameter("change_new_passwort2");
         String altesPasswort = request.getParameter("change_old_password");
-        
+
         User user = userBean.getCurrentUser();
-        if(!vorname.isBlank()){
-            user.setVorname(vorname);   
+        if (!vorname.isBlank()) {
+            user.setVorname(vorname);
         }
-        if(!nachname.isBlank()){
+        if (!nachname.isBlank()) {
             user.setNachname(nachname);
         }
-       
-        if(passwort1.isEmpty() && passwort2.isEmpty() && altesPasswort.isEmpty()){
+
+        if (passwort1.isEmpty() && passwort2.isEmpty() && altesPasswort.isEmpty()) {
             userBean.update(user);
             response.sendRedirect(request.getContextPath() + "/app/change/");
             return;
         }
-        
+
         List<String> errors = this.validationBean.validate(user);
-        if(!user.checkPassword(altesPasswort)){ 
+        if (!user.checkPassword(altesPasswort)) {
             errors.add("Das alte Passwort stimmt nicht.");
         }
-        
+
         this.validationBean.validate(passwort1, errors);
-        
-        if(passwort1.length() < 6){
+
+        if (passwort1.length() < 6) {
             errors.add("Das neue Passwort muss zwischen sechs und 64 Zeichen lang sein.");
         }
-        
+
         if (!passwort1.isEmpty() && !passwort2.isEmpty() && !passwort1.equals(passwort2)) {
             errors.add("Die beiden neuen Passwörter stimmen nicht überein.");
         }
-        
+
         // Neuen Eintrag speichern
         if (errors.isEmpty()) {
             try {
@@ -79,31 +78,30 @@ public class ChangeServlet extends HttpServlet {
             } catch (UserBean.InvalidCredentialsException ex) {
                 Logger.getLogger(ChangeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-           this.userBean.update(user);
-           session.removeAttribute("change_form");
-           response.sendRedirect(request.getContextPath() + "/app/change/");
-        }else{
-        // Fehler: Formuler erneut anzeigen
+            this.userBean.update(user);
+            session.removeAttribute("change_form");
+            response.sendRedirect(request.getContextPath() + "/app/change/");
+        } else {
+            // Fehler: Formuler erneut anzeigen
             FormValues formValues = new FormValues();
             formValues.setValues(request.getParameterMap());
             formValues.setErrors(errors);
-        
+
             session.setAttribute("change_form", formValues);
-            
+
             response.sendRedirect(request.getRequestURI());
         }
     }
-    
-    
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         User user = userBean.getCurrentUser();
-        
+
         // Verfügbare Spezies und Stati für die Suchfelder ermitteln
         request.setAttribute("current_user", user);
-       
+
         // Anzuzeigende Aufgaben suchen
         request.setAttribute("change_vorname", user.getVorname());
         request.setAttribute("change_nachname", user.getNachname());
@@ -112,4 +110,3 @@ public class ChangeServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/login/change.jsp").forward(request, response);
     }
 }
-

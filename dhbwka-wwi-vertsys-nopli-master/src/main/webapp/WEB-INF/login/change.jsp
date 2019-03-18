@@ -21,15 +21,15 @@
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/list/"/>">Liste</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/tierart/new/"/>">Tierart anlegen</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/spezies/"/>">Spezies bearbeiten</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/change/"/>">Daten ändern</a>
         </div>
@@ -49,14 +49,14 @@
                     <div class="side-by-side">
                         <input type="text" name="change_vorname" placeholder="${current_user.vorname}">
                     </div>
-                    
+
                     <label for="change_nachname">
                         Nachname:
                     </label>
                     <div class="side-by-side">
                         <input type="text" name="change_nachname" placeholder="${current_user.nachname}"> 
                     </div>
-                    
+
                     <label for="change_old_password">
                         Altes Passwort:
                     </label>
@@ -79,7 +79,7 @@
                     </div>
 
                     <br>
-                    
+
                     <%-- Button zum Abschicken --%>
                     <div class="side-by-side">
                         <button class="icon-pencil" type="submit">

@@ -16,7 +16,7 @@ public class UserBean {
 
     @PersistenceContext
     EntityManager em;
-    
+
     @Resource
     EJBContext ctx;
 
@@ -47,6 +47,7 @@ public class UserBean {
 
     /**
      * Passwort ändern (ohne zu speichern)
+     *
      * @param user
      * @param oldPassword
      * @param newPassword
@@ -60,18 +61,20 @@ public class UserBean {
 
         user.setPassword(newPassword);
     }
-    
+
     /**
      * Benutzer löschen
+     *
      * @param user Zu löschender Benutzer
      */
     @RolesAllowed("app-user")
     public void delete(User user) {
         this.em.remove(user);
     }
-    
+
     /**
      * Benutzer aktualisieren
+     *
      * @param user Zu aktualisierender Benutzer
      * @return Gespeicherter Benutzer
      */

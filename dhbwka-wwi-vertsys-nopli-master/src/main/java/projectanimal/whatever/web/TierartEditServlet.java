@@ -1,12 +1,3 @@
-/*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
- * 
- * E-Mail: dhbw@windows3.de
- * Webseite: https://www.wpvs.de/
- * 
- * Dieser Quellcode ist lizenziert unter einer
- * Creative Commons Namensnennung 4.0 International Lizenz.
- */
 package projectanimal.whatever.web;
 
 import dhbwka.wwi.vertsys.javaee.projectanimal.common.ejb.*;
@@ -46,13 +37,13 @@ public class TierartEditServlet extends HttpServlet {
 
         // Verfügbare Spezies und Stati für die Suchfelder ermitteln
         request.setAttribute("categories", this.speziesBean.findAllSorted());
-        
+
         // Zu bearbeitende Tierart einlesen
         HttpSession session = request.getSession();
 
         Tierart tierart = this.getRequestedTierart(request);
         request.setAttribute("edit", tierart.getId() != 0);
-                                
+
         if (session.getAttribute("tierart_form") == null) {
             // Keine Formulardaten mit fehlerhaften Daten in der Session,
             // daher Formulardaten aus dem Datenbankobjekt übernehmen
@@ -61,7 +52,7 @@ public class TierartEditServlet extends HttpServlet {
 
         // Anfrage an die JSP weiterleiten
         request.getRequestDispatcher("/WEB-INF/animals/tierart_edit.jsp").forward(request, response);
-        
+
         session.removeAttribute("tierart_form");
     }
 
@@ -102,7 +93,7 @@ public class TierartEditServlet extends HttpServlet {
 
         String tierartSpezies = request.getParameter("tierart_spezies");
         String tierartTierartname = request.getParameter("tierart_tierartname");
-      
+
         Tierart tierart = this.getRequestedTierart(request);
 
         if (tierartSpezies != null && !tierartSpezies.trim().isEmpty()) {
@@ -114,7 +105,7 @@ public class TierartEditServlet extends HttpServlet {
         }
 
         tierart.setTierartname(tierartTierartname);
-       
+
         this.validationBean.validate(tierart, errors);
 
         // Datensatz speichern
@@ -170,7 +161,7 @@ public class TierartEditServlet extends HttpServlet {
         // Zunächst davon ausgehen, dass ein neuer Satz angelegt werden soll
         Tierart tierart = new Tierart();
         tierart.setOwner(this.userBean.getCurrentUser());
-        
+
         // ID aus der URL herausschneiden
         String tierartId = request.getPathInfo();
 
@@ -216,7 +207,7 @@ public class TierartEditServlet extends HttpServlet {
                 "" + tierart.getCategory().getId()
             });
         }
-      
+
         values.put("tierart_tierartname", new String[]{
             tierart.getTierartname()
         });

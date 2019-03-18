@@ -1,12 +1,3 @@
-<%-- 
-    Copyright © 2018 Dennis Schulmeister-Zimolong
-
-    E-Mail: dhbw@windows3.de
-    Webseite: https://www.wpvs.de/
-
-    Dieser Quellcode ist lizenziert unter einer
-    Creative Commons Namensnennung 4.0 International Lizenz.
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@taglib tagdir="/WEB-INF/tags/templates" prefix="template"%>
@@ -45,7 +36,7 @@
                     <div class="side-by-side">
                         <input type="text" name="signup_vorname" value="${signup_form.values["signup_vorname"][0]}">
                     </div>
-                    
+
                     <label for="signup_nachname">
                         Nachname:
                         <span class="required">*</span>
@@ -53,7 +44,7 @@
                     <div class="side-by-side">
                         <input type="text" name="signup_nachname" value="${signup_form.values["signup_nachname"][0]}">
                     </div>
-                    
+
                     <label for="signup_username">
                         Benutzername:
                         <span class="required">*</span>
@@ -79,7 +70,7 @@
                     </div>
 
                     <br>
-                    
+
                     <%-- Button zum Abschicken --%>
                     <div class="side-by-side">
                         <button class="icon-pencil" type="submit">

@@ -8,5 +8,6 @@ import javax.ejb.Local;
  */
 @Local
 public interface DashboardContentProvider {
+
     void createDashboardContent(List<DashboardSection> sections);
 }

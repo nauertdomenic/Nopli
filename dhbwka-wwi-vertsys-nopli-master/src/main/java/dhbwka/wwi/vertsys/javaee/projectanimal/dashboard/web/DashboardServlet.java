@@ -29,7 +29,7 @@ public class DashboardServlet extends HttpServlet {
         // Dashboard-Rubriken und Kacheln erzeugen und im Request Context ablegen
         List<DashboardSection> sections = new ArrayList<>();
         request.setAttribute("sections", sections);
-        
+
         tierartContent.createDashboardContent(sections);
 
         // Anfrage an die JSP weiterleiten

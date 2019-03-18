@@ -1,12 +1,3 @@
-/*
- * Copyright © 2019 Dennis Schulmeister-Zimolong
- * 
- * E-Mail: dhbw@windows3.de
- * Webseite: https://www.wpvs.de/
- * 
- * Dieser Quellcode ist lizenziert unter einer
- * Creative Commons Namensnennung 4.0 International Lizenz.
- */
 package projectanimal.whatever.web;
 
 import java.io.IOException;
@@ -29,7 +20,7 @@ public class TierartListServlet extends HttpServlet {
 
     @EJB
     private SpeziesBean speziesBean;
-    
+
     @EJB
     private TierartBean tierartBean;
 
@@ -39,14 +30,14 @@ public class TierartListServlet extends HttpServlet {
 
         // Verfügbare Spezies und Stati für die Suchfelder ermitteln
         request.setAttribute("categories", this.speziesBean.findAllSorted());
-       
+
         // Suchparameter aus der URL auslesen
         String searchText = request.getParameter("search_text");
         String searchSpezies = request.getParameter("search_spezies");
-       
+
         // Anzuzeigende Aufgaben suchen
         Spezies spezies = null;
-       
+
         if (searchSpezies != null) {
             try {
                 spezies = this.speziesBean.findById(Long.parseLong(searchSpezies));

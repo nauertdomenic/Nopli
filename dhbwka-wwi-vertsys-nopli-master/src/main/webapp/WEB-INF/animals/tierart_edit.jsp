@@ -28,15 +28,15 @@
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/list/"/>">Liste</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/tierart/new/"/>">Tierart anlegen</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/spezies/"/>">Spezies bearbeiten</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/change/"/>">Daten ändern</a>
         </div>
@@ -76,7 +76,7 @@
                 </div>
 
                 <br>
-                
+
                 <%-- Button zum Abschicken --%>
                 <div class="side-by-side">
                     <button class="icon-pencil" type="submit" name="action" value="save">
@@ -96,7 +96,7 @@
                 <ul class="errors">
                     <c:forEach items="${tierart_form.errors}" var="error">
                         <li>${error}</li>
-                    </c:forEach>
+                        </c:forEach>
                 </ul>
             </c:if>
         </form>

@@ -21,15 +21,15 @@
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/list/"/>">Liste</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/tierart/new/"/>">Tierart anlegen</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/tierarten/spezies/"/>">Spezies bearbeiten</a>
         </div>
-        
+
         <div class="menuitem">
             <a href="<c:url value="/app/change/"/>">Daten ändern</a>
         </div>
@@ -46,7 +46,7 @@
                 <input type="text" name="name" value="${categories_form.values["name"][0]}">
 
                 <br>
-                
+
                 <button type="submit" name="action" value="create" class="icon-pencil">
                     Anlegen
                 </button>
@@ -79,7 +79,7 @@
                                 <br />
                             </c:forEach>
                         </div>
-                        
+
                         <button type="submit" name="action" value="delete" class="icon-trash">
                             Markierte löschen
                         </button>

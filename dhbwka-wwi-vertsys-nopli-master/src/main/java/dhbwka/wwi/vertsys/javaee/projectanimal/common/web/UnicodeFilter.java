@@ -30,13 +30,13 @@ public class UnicodeFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {
-        
+
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        
+
         chain.doFilter(request, response);
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc="Methoden, die wir leider mitschleppen müssen">
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -46,5 +46,5 @@ public class UnicodeFilter implements Filter {
     public void destroy() {
     }
     //</editor-fold>
-    
+
 }
