@@ -35,7 +35,7 @@ public class TierartListRest {
         // Anzuzeigende Aufgaben suchen
         Spezies spezies = null;
         
-        List<Tierart> tierarten = this.tierartBean.search("asd", spezies);
+        List<Tierart> tierarten = this.tierartBean.findAll();
         Gson gson = new Gson();
         String json = gson.toJson(tierarten);
         System.out.println(json);
