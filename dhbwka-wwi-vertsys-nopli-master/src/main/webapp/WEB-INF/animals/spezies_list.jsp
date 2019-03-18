@@ -10,7 +10,7 @@
     </jsp:attribute>
 
     <jsp:attribute name="head">
-        <link rel="stylesheet" href="<c:url value="/css/category_list.css"/>" />
+        <link rel="stylesheet" href="<c:url value="/css/spezies_list.css"/>" />
     </jsp:attribute>
 
     <jsp:attribute name="menu">
