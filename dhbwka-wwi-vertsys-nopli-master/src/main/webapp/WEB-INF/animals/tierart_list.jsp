@@ -38,9 +38,9 @@
     <jsp:attribute name="content">
         <%-- Suchfilter --%>
         <form method="GET" class="horizontal" id="search">
-            <input type="text" name="search_text" value="${param.search_text}" placeholder="Beschreibung"/>
+            <input id="test" type="text" name="search_text" value="${param.search_text}" placeholder="Beschreibung"/>
 
-            <select name="search_spezies">
+            <select id="test" name="search_spezies">
                 <option value="">Alle Spezies</option>
 
                 <c:forEach items="${categories}" var="category">
@@ -50,7 +50,7 @@
                 </c:forEach>
             </select>
 
-            <button class="icon-search" type="submit">
+            <button id="test" class="icon-search" type="submit">
                 Suchen
             </button>
         </form>

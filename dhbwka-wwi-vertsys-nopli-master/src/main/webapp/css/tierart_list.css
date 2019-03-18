@@ -14,7 +14,13 @@ Creative Commons Namensnennung 4.0 International Lizenz.
 }
 
 td, th {
+    margin-right: 2em;
     padding-right: 2em;
     text-align: left;
     vertical-align: baseline;
 }
+
+test{
+    margin: 2em;
+}
+

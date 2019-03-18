@@ -45,6 +45,8 @@
                 <label for="j_username">Neue Spezies:</label>
                 <input type="text" name="name" value="${categories_form.values["name"][0]}">
 
+                <br>
+                
                 <button type="submit" name="action" value="create" class="icon-pencil">
                     Anlegen
                 </button>
@@ -77,7 +79,7 @@
                                 <br />
                             </c:forEach>
                         </div>
-
+                        
                         <button type="submit" name="action" value="delete" class="icon-trash">
                             Markierte löschen
                         </button>

@@ -87,7 +87,7 @@ textarea,
 select {
     border: 1px solid #bebebe;
     padding: 0.5em;
-    margin: 0;
+    margin-right: 2em;
     outline: none;
     background: white;
 }
