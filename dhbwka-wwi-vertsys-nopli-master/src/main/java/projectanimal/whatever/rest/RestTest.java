@@ -4,7 +4,6 @@ package projectanimal.whatever.rest;
  *
  * @author simon
  */
-import dhbwka.wwi.vertsys.javaee.projectanimal.common.ejb.UserBean;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
