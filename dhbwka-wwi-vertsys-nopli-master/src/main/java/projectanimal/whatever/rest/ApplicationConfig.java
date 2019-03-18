@@ -25,7 +25,7 @@ public Set<Class<?>> getClasses() {
 Set<Class<?>> resources = new HashSet<>();
  
 resources.add(projectanimal.whatever.rest.RestTest.class);
- 
+resources.add(projectanimal.whatever.rest.TierartListRest.class);
  
 return resources;
 }
