@@ -5,7 +5,7 @@ package projectanimal.whatever.jpa;
  * @author simon
  */
 public enum TierartStatus {
-    OPEN, IN_PROGRESS, FINISHED, CANCELED, POSTPONED;
+    AUSGESTORBEN, BEDROHT, ENTDECKT, GESCHÜTZT, IN_FORSCHUNG, MYTHOS;
 
     /**
      * Bezeichnung ermitteln
@@ -14,16 +14,18 @@ public enum TierartStatus {
      */
     public String getLabel() {
         switch (this) {
-            case OPEN:
-                return "Offen";
-            case IN_PROGRESS:
-                return "In Bearbeitung";
-            case FINISHED:
-                return "Erledigt";
-            case CANCELED:
-                return "Abgebrochen";
-            case POSTPONED:
-                return "Zurückgestellt";
+            case AUSGESTORBEN:
+                return "ausgestorben";
+            case BEDROHT:
+                return "bedroht";
+            case ENTDECKT:
+                return "entdeckt";
+            case GESCHÜTZT:
+                return "geschützt";
+            case IN_FORSCHUNG:
+                return "wird Untersucht";
+            case MYTHOS:
+                return "Mythos";
             default:
                 return this.toString();
         }

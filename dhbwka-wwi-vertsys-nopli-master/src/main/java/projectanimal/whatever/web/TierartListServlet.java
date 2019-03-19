@@ -10,6 +10,7 @@ import projectanimal.whatever.ejb.SpeziesBean;
 import projectanimal.whatever.ejb.TierartBean;
 import projectanimal.whatever.jpa.Spezies;
 import projectanimal.whatever.jpa.Tierart;
+import projectanimal.whatever.jpa.TierartStatus;
 
 /**
  *
@@ -30,13 +31,16 @@ public class TierartListServlet extends HttpServlet {
 
         // Verfügbare Spezies und Stati für die Suchfelder ermitteln
         request.setAttribute("categories", this.speziesBean.findAllSorted());
+        request.setAttribute("statuses", TierartStatus.values());
 
         // Suchparameter aus der URL auslesen
         String searchText = request.getParameter("search_text");
         String searchSpezies = request.getParameter("search_spezies");
+        String searchStatus = request.getParameter("search_status");
 
         // Anzuzeigende Aufgaben suchen
         Spezies spezies = null;
+        TierartStatus status = null;
 
         if (searchSpezies != null) {
             try {
@@ -45,8 +49,17 @@ public class TierartListServlet extends HttpServlet {
                 spezies = null;
             }
         }
+        
+        if (searchStatus != null) {
+            try {
+                status = TierartStatus.valueOf(searchStatus);
+            } catch (IllegalArgumentException ex) {
+                status = null;
+            }
 
-        List<Tierart> tierarten = this.tierartBean.search(searchText, spezies);
+        }
+
+        List<Tierart> tierarten = this.tierartBean.search(searchText, spezies, status);
         request.setAttribute("tierarten", tierarten);
 
         // Anfrage an die JSP weiterleiten

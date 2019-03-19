@@ -49,6 +49,16 @@
                     </option>
                 </c:forEach>
             </select>
+            
+            <select name="search_status">
+                <option value="">Alle Stati</option>
+
+                <c:forEach items="${statuses}" var="status">
+                    <option value="${status}" ${param.search_status == status ? 'selected' : ''}>
+                        <c:out value="${status.label}"/>
+                    </option>
+                </c:forEach>
+            </select>
 
             <button id="test" class="icon-search" type="submit">
                 Suchen
@@ -70,6 +80,7 @@
                         <tr>
                             <th>Bezeichnung</th>
                             <th>Spezies</th>
+                            <th>Status</th>
                             <th>Eigentümer</th>
                         </tr>
                     </thead>
@@ -82,6 +93,9 @@
                             </td>
                             <td>
                                 <c:out value="${tierart.category.name}"/>
+                            </td>
+                            <td>
+                                <c:out value="${tierart.status.label}"/>
                             </td>
                             <td>
                                 <c:out value="${tierart.owner.username}"/>

@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import projectanimal.whatever.jpa.Spezies;
+import projectanimal.whatever.jpa.TierartStatus;
 
 /**
  * EJB zur Definition der Dashboard-Kacheln für Tierarten.
@@ -68,9 +69,39 @@ public class DashboardContent implements DashboardContentProvider {
         }
 
         // Eine Kachel für alle Tierarten in dieser Rubrik erzeugen
-        DashboardTile tile = this.createTile(spezies, "Alle", cssClass + " status-all", "calendar");
+        DashboardTile tile = this.createTile(spezies, null, "Alle", cssClass + " status-all", "calendar");
         section.getTiles().add(tile);
 
+        // Ja Aufgabenstatus eine weitere Kachel erzeugen
+        for (TierartStatus status : TierartStatus.values()) {
+            String cssClass1 = cssClass + " status-" + status.toString().toLowerCase();
+            String icon = "";
+
+            switch (status) {
+                case AUSGESTORBEN:
+                    icon = "doc-text";
+                    break;
+                case IN_FORSCHUNG:
+                    icon = "rocket";
+                    break;
+                case BEDROHT:
+                    icon = "ok";
+                    break;
+                case ENTDECKT:
+                    icon = "cancel";
+                    break;
+                case GESCHÜTZT:
+                    icon = "bell-off-empty";
+                    break;
+                case MYTHOS:
+                    icon = "";
+                    break;
+            }
+
+            tile = this.createTile(spezies, status, status.getLabel(), cssClass1, icon);
+            section.getTiles().add(tile);
+        }
+        
         // Erzeugte Dashboard-Rubrik mit den Kacheln zurückliefern
         return section;
     }
@@ -87,12 +118,16 @@ public class DashboardContent implements DashboardContentProvider {
      * @param icon
      * @return
      */
-    private DashboardTile createTile(Spezies spezies, String label, String cssClass, String icon) {
-        int amount = tierartBean.search(null, spezies).size();
+    private DashboardTile createTile(Spezies spezies, TierartStatus status, String label, String cssClass, String icon) {
+        int amount = tierartBean.search(null, spezies, status).size();
         String href = "/app/tierarten/list/";
 
         if (spezies != null) {
             href = WebUtils.addQueryParameter(href, "search_spezies", "" + spezies.getId());
+        }
+        
+        if (status != null) {
+            href = WebUtils.addQueryParameter(href, "search_status", status.toString());
         }
 
         DashboardTile tile = new DashboardTile();

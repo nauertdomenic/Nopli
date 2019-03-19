@@ -74,6 +74,20 @@
                 <div class="side-by-side">
                     <input type="text" name="tierart_tierartname" value="${tierart_form.values["tierart_tierartname"][0]}">
                 </div>
+                
+                <label for="tierart_status">
+                    Status:
+                    <span class="required">*</span>
+                </label>
+                <div class="side-by-side margin">
+                    <select name="tierart_status">
+                        <c:forEach items="${statuses}" var="status">
+                            <option value="${status}" ${tierart_form.values["tierart_status"][0] == status ? 'selected' : ''}>
+                                <c:out value="${status.label}"/>
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
 
                 <br>
 

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import projectanimal.whatever.ejb.*;
 import projectanimal.whatever.jpa.Tierart;
+import projectanimal.whatever.jpa.TierartStatus;
 
 /**
  *
@@ -37,6 +38,7 @@ public class TierartEditServlet extends HttpServlet {
 
         // Verfügbare Spezies und Stati für die Suchfelder ermitteln
         request.setAttribute("categories", this.speziesBean.findAllSorted());
+        request.setAttribute("statuses", TierartStatus.values());
 
         // Zu bearbeitende Tierart einlesen
         HttpSession session = request.getSession();
@@ -93,6 +95,7 @@ public class TierartEditServlet extends HttpServlet {
 
         String tierartSpezies = request.getParameter("tierart_spezies");
         String tierartTierartname = request.getParameter("tierart_tierartname");
+        String tierartStatus = request.getParameter("tierart_status");
 
         Tierart tierart = this.getRequestedTierart(request);
 
@@ -104,6 +107,12 @@ public class TierartEditServlet extends HttpServlet {
             }
         }
 
+        try {
+            tierart.setStatus(TierartStatus.valueOf(tierartStatus));
+        } catch (IllegalArgumentException ex) {
+            errors.add("Der ausgewählte Status ist nicht vorhanden.");
+        }
+        
         tierart.setTierartname(tierartTierartname);
 
         this.validationBean.validate(tierart, errors);
@@ -207,6 +216,10 @@ public class TierartEditServlet extends HttpServlet {
                 "" + tierart.getCategory().getId()
             });
         }
+        
+        values.put("tierart_status", new String[]{
+            tierart.getStatus().toString()
+        });
 
         values.put("tierart_tierartname", new String[]{
             tierart.getTierartname()
