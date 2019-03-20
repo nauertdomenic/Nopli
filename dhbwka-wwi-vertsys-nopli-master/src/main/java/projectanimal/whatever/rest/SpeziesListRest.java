@@ -7,28 +7,27 @@ import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import projectanimal.whatever.ejb.SpeziesBean;
-import projectanimal.whatever.ejb.TierartBean;
 import projectanimal.whatever.jpa.Spezies;
-import projectanimal.whatever.jpa.Tierart;
+
 
 /**
  *
  * @author simon
  */
 @Stateless
-@Path("tierliste")
-public class TierartListRest {
+@Path("speziesliste")
+public class SpeziesListRest {
 
     @EJB
-    private TierartBean tierartBean;
+    private SpeziesBean speziesBean;
 
     @GET
     public String doGet() {
         // Anzuzeigende Tierarten suchen
 
-        List<Tierart> tierarten = this.tierartBean.findAll();
+        List<Spezies> spezies = this.speziesBean.findAll();
         Gson gson = new Gson();
-        String json = gson.toJson(tierarten);
+        String json = gson.toJson(spezies);
         System.out.println(json);
         return json;
     }

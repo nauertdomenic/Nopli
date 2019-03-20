@@ -37,7 +37,7 @@ public class TierartEditServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Verfügbare Spezies und Stati für die Suchfelder ermitteln
-        request.setAttribute("categories", this.speziesBean.findAllSorted());
+        request.setAttribute("spezien", this.speziesBean.findAllSorted());
         request.setAttribute("statuses", TierartStatus.values());
 
         // Zu bearbeitende Tierart einlesen
@@ -101,7 +101,7 @@ public class TierartEditServlet extends HttpServlet {
 
         if (tierartSpezies != null && !tierartSpezies.trim().isEmpty()) {
             try {
-                tierart.setCategory(this.speziesBean.findById(Long.parseLong(tierartSpezies)));
+                tierart.setSpezies(this.speziesBean.findById(Long.parseLong(tierartSpezies)));
             } catch (NumberFormatException ex) {
                 // Ungültige oder keine ID mitgegeben
             }
@@ -211,9 +211,9 @@ public class TierartEditServlet extends HttpServlet {
             tierart.getOwner().getUsername()
         });
 
-        if (tierart.getCategory() != null) {
+        if (tierart.getSpezies() != null) {
             values.put("tierart_spezies", new String[]{
-                "" + tierart.getCategory().getId()
+                "" + tierart.getSpezies().getId()
             });
         }
         

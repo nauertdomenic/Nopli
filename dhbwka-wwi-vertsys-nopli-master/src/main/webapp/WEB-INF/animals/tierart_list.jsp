@@ -43,9 +43,9 @@
             <select id="test" name="search_spezies">
                 <option value="">Alle Spezies</option>
 
-                <c:forEach items="${categories}" var="category">
-                    <option value="${category.id}" ${param.search_spezies == category.id ? 'selected' : ''}>
-                        <c:out value="${category.name}" />
+                <c:forEach items="${spezien}" var="spezies">
+                    <option value="${spezies.id}" ${param.search_spezies == spezies.id ? 'selected' : ''}>
+                        <c:out value="${spezies.name}" />
                     </option>
                 </c:forEach>
             </select>
@@ -92,7 +92,7 @@
                                 </a>
                             </td>
                             <td>
-                                <c:out value="${tierart.category.name}"/>
+                                <c:out value="${tierart.spezies.name}"/>
                             </td>
                             <td>
                                 <c:out value="${tierart.status.label}"/>

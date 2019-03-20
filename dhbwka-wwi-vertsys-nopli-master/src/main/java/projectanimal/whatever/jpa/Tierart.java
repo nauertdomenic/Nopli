@@ -26,7 +26,7 @@ public class Tierart implements Serializable {
     private User owner;
 
     @ManyToOne
-    private Spezies category;
+    private Spezies spezies;
 
     @Column(length = 50)
     @NotNull(message = "Der Tierartname darf nicht leer sein.")
@@ -43,7 +43,7 @@ public class Tierart implements Serializable {
 
     public Tierart(User owner, Spezies spezies, String tierartname) {
         this.owner = owner;
-        this.category = spezies;
+        this.spezies = spezies;
         this.tierartname = tierartname;
     }
     //</editor-fold>
@@ -65,12 +65,12 @@ public class Tierart implements Serializable {
         this.owner = owner;
     }
 
-    public Spezies getCategory() {
-        return category;
+    public Spezies getSpezies() {
+        return spezies;
     }
 
-    public void setCategory(Spezies category) {
-        this.category = category;
+    public void setSpezies(Spezies spezies) {
+        this.spezies = spezies;
     }
 
     public String getTierartname() {

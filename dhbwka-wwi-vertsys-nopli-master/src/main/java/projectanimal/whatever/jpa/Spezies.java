@@ -25,7 +25,7 @@ public class Spezies implements Serializable {
     @Size(min = 3, max = 30, message = "Der Name muss zwischen drei und 30 Zeichen lang sein.")
     private String name;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "spezies", fetch = FetchType.LAZY)
     List<Tierart> tierarten = new ArrayList<>();
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">

@@ -34,7 +34,7 @@ public class SpeziesListServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Alle vorhandenen Spezies ermitteln
-        request.setAttribute("categories", this.speziesBean.findAllSorted());
+        request.setAttribute("spezien", this.speziesBean.findAllSorted());
 
         // Anfrage an dazugerhörige JSP weiterleiten
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/animals/spezies_list.jsp");
@@ -42,7 +42,7 @@ public class SpeziesListServlet extends HttpServlet {
 
         // Alte Formulardaten aus der Session entfernen
         HttpSession session = request.getSession();
-        session.removeAttribute("categories_form");
+        session.removeAttribute("spezien_form");
     }
 
     @Override
@@ -95,7 +95,7 @@ public class SpeziesListServlet extends HttpServlet {
             formValues.setErrors(errors);
 
             HttpSession session = request.getSession();
-            session.setAttribute("categories_form", formValues);
+            session.setAttribute("spezien_form", formValues);
         }
 
         response.sendRedirect(request.getRequestURI());
@@ -113,7 +113,7 @@ public class SpeziesListServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Markierte Spezies IDs auslesen
-        String[] speziesIds = request.getParameterValues("category");
+        String[] speziesIds = request.getParameterValues("spezies");
 
         if (speziesIds == null) {
             speziesIds = new String[0];
@@ -139,7 +139,7 @@ public class SpeziesListServlet extends HttpServlet {
 
             if (tierarten != null) {
                 tierarten.forEach((Tierart tierart) -> {
-                    tierart.setCategory(null);
+                    tierart.setSpezies(null);
                     this.tierartBean.update(tierart);
                 });
             }

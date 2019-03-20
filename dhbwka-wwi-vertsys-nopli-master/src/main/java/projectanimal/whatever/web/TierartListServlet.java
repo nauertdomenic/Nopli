@@ -30,7 +30,7 @@ public class TierartListServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Verfügbare Spezies und Stati für die Suchfelder ermitteln
-        request.setAttribute("categories", this.speziesBean.findAllSorted());
+        request.setAttribute("spezien", this.speziesBean.findAllSorted());
         request.setAttribute("statuses", TierartStatus.values());
 
         // Suchparameter aus der URL auslesen

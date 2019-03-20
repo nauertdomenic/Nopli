@@ -43,7 +43,7 @@
             <%-- Feld zum Anlegen einer neuen Spezies --%>
             <div class="column margin">
                 <label for="j_username">Neue Spezies:</label>
-                <input type="text" name="name" value="${categories_form.values["name"][0]}">
+                <input type="text" name="name" value="${spezien_form.values["name"][0]}">
 
                 <br>
 
@@ -53,9 +53,9 @@
             </div>
 
             <%-- Fehlermeldungen --%>
-            <c:if test="${!empty categories_form.errors}">
+            <c:if test="${!empty spezien_form.errors}">
                 <ul class="errors margin">
-                    <c:forEach items="${categories_form.errors}" var="error">
+                    <c:forEach items="${spezien_form.errors}" var="error">
                         <li>${error}</li>
                         </c:forEach>
                 </ul>
@@ -63,7 +63,7 @@
 
             <%-- Vorhandene Spezies --%>
             <c:choose>
-                <c:when test="${empty categories}">
+                <c:when test="${empty spezien}">
                     <p>
                         Es ist noch keine Spezies vorhanden. 🐏
                     </p>
@@ -71,10 +71,10 @@
                 <c:otherwise>
                     <div>
                         <div class="margin">
-                            <c:forEach items="${categories}" var="category">
-                                <input type="checkbox" name="category" id="${'category-'.concat(category.id)}" value="${category.id}" />
-                                <label for="${'category-'.concat(category.id)}">
-                                    <c:out value="${category.name}"/>
+                            <c:forEach items="${spezien}" var="spezies">
+                                <input type="checkbox" name="spezies" id="${'spezies-'.concat(spezies.id)}" value="${spezies.id}" />
+                                <label for="${'spezies-'.concat(spezies.id)}">
+                                    <c:out value="${spezies.name}"/>
                                 </label>
                                 <br />
                             </c:forEach>

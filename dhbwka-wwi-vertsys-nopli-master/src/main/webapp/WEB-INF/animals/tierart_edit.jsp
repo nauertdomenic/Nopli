@@ -59,9 +59,9 @@
                     <select name="tierart_spezies">
                         <option value="">Keine Spezies</option>
 
-                        <c:forEach items="${categories}" var="category">
-                            <option value="${category.id}" ${tierart_form.values["tierart_spezies"][0] == category.id.toString() ? 'selected' : ''}>
-                                <c:out value="${category.name}" />
+                        <c:forEach items="${spezien}" var="spezies">
+                            <option value="${spezies.id}" ${tierart_form.values["tierart_spezies"][0] == spezies.id.toString() ? 'selected' : ''}>
+                                <c:out value="${spezies.name}" />
                             </option>
                         </c:forEach>
                     </select>

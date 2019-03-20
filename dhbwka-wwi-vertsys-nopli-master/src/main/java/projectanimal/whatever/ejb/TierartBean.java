@@ -62,7 +62,7 @@ public class TierartBean extends EntityBean<Tierart, Long> {
 
         // WHERE t.spezies = :spezies
         if (spezies != null) {
-            p = cb.and(p, cb.equal(from.get("category"), spezies));
+            p = cb.and(p, cb.equal(from.get("spezies"), spezies));
             query.where(p);
         }
         

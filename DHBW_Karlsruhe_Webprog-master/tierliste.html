@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("button").click(function() {
+				$.getJSON("https://localhost:8443/projectAnimal/RestAPI/tierliste", function(data) {
+					var items = [];
+					var count = 1;
+					$.each(data, function(key, val) {
+						items.push("<h3>" + count + ". Tierart:</h3>")
+						items.push("<li>Tierartname: " + val.tierartname + "</li>");
+						//items.push("<li>Spezies: " + val.category.name + "</li>");
+						items.push("<li>Status: " + val.status + "</li>");
+						items.push("<li>Forscher: " + val.owner.vorname + " " + val.owner.nachname + "</li>");
+						items.push("<br />");
+
+						count = count + 1;
+					});
+
+					$("<ul/>", {
+						"class": "my-new-list",
+						html: items.join("")
+					}).appendTo("body");
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<button>Laden</button>
+</body>
