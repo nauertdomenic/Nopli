@@ -12,7 +12,7 @@ $.getJSON( "https://localhost:8443/projectAnimal/RestAPI/tierliste", function( d
   var items = [];
   $.each( data, function( key, val ) {
 	  console.log(key, val.tierartname);
-    items.push( val.tierartname );
+    items.push("Tierartname: " + val.tierartname + "</p> ");
   });
  
   $( "<ul/>", {
