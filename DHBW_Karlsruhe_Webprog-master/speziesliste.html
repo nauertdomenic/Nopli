@@ -4,14 +4,18 @@
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
+
 		$(document).ready(function() {
-			$("button").click(function() {
-				$.getJSON("https://localhost:8443/projectAnimal/RestAPI/speziesliste", function(data) {
+			$("#btnId").click(function() {
+				var id = $('#inputId').val();
+				var url = "https://localhost:8443/projectAnimal/RestAPI/speziesliste/" + id;
+				$.getJSON(url, function(data) {
 					var items = [];
 					var count = 1;
+
 					$.each(data, function(key, val) {
 						items.push("<h3>" + count + ". Spezies:</h3>")
-						items.push("<li>Spezies: " + val.name + "</li>");
+						items.push("<li>Spezies: " + val + "</li>");
 						items.push("<br />");
 
 						count = count + 1;
@@ -28,5 +32,6 @@
 </head>
 
 <body>
-	<button>Laden</button>
+	<input id="inputId" type="text" name="ID" placeholder="ID" />
+	<button id="btnId">Laden</button>
 </body>
