@@ -5,7 +5,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function() {
-			$("button").click(function() {
+			$("#btnAlle").click(function() {
 				$.getJSON("https://localhost:8443/projectAnimal/RestAPI/tierliste", function(data) {
 					var items = [];
 					var count = 1;
@@ -20,10 +20,12 @@
 						count = count + 1;
 					});
 
+					$("#platzhalter").empty();
+
 					$("<ul/>", {
 						"class": "my-new-list",
 						html: items.join("")
-					}).appendTo("body");
+					}).appendTo("#platzhalter");
 				});
 			});
 		});
@@ -31,5 +33,9 @@
 </head>
 
 <body>
-	<button>Laden</button>
+	<button id="btnAlle">Lade alle</button>
+
+	<div id="platzhalter">
+
+	</div>
 </body>
