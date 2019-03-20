@@ -4,11 +4,30 @@
 <head>
 	<link rel="stylesheet" href="hauptseite.css">
 	<script type="text/javascript" src="hauptseite.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+$.getJSON( "https://localhost:8443/projectAnimal/RestAPI/tierliste", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+	  console.log(key, val.tierartname);
+    items.push( val.tierartname );
+  });
+ 
+  $( "<ul/>", {
+    "class": "my-new-list",
+    html: items.join( "" )
+  }).appendTo( "body" );
+});
+});
+});
+</script>
 </head>
 
 <body>
-	<button onclick="laden()">Laden</button>
-	<div id="demo">
+	<button>Laden</button>
+	<div >
 
 	</div>
 </body>
