@@ -24,7 +24,7 @@ public class SpeziesnameRest {
     @GET
     public String doGet(@PathParam("name") String name) {
         // Anzuzeigende Spezies suchen
-        List<Spezies> spezies = this.speziesBean.findAllName(name);
+        List<Spezies> spezies = this.speziesBean.findAllSpeziesByName(name);
         Gson gson = new Gson();
         String json = gson.toJson(spezies);
         return json;
