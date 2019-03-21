@@ -44,7 +44,8 @@
 
 						 $.each(data, function(key, val) {
 						 	items.push("<h3>" + count + ". Spezies</h3>")
-						 	items.push("<li>Spezies: " + val + "</li>");
+							items.push("<li>SpeziesID: " + val.id + "</li>");
+						 	items.push("<li>Speziesname: " + val.name + "</li>");
 
 						 	count = count + 1;
 						 });
