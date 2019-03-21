@@ -5,53 +5,39 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 		var url = "https://localhost:8443/projectAnimal/RestAPI/"
-		//findet alle
+		var urlName = "speziesname/";
+		var urlAlle = "speziesliste/";
+		var items = [];
+		var urlParameter = "";
 
+		//findet alle
 			$(document).ready(function() {
-				$("#btnAlle").click(function() {
+				$("#btnSuchen").click(function() {
+
 					//Service Link
-					var clickUrl = url + "speziesliste/";
-					$.getJSON(clickUrl, function(data) {
-						var items = [];
+					var inputParameter = $('#inputName').val();
+
+					if (inputParameter != "") {
+						urlParameter = url + urlName + inputParameter;
+					} else {
+						urlParameter = url + urlAlle;
+					}
+
+					var serviceUrl = url + urlAlle;
+					$.getJSON(urlParameter, function(data) {
 						var count = 1;
 
 						$.each(data, function(key, val) {
-							items.push("<h3>" + count + ". Spezies</h3>")
-							items.push("<li>Spezies: " + val.name + "</li>");
+							items.push("<h3>" + count + ". Spezies</h3>");
+							items.push("<li>SpeziesID: " + val.id + "</li>");
+							items.push("<li>Speziesname: " + val.name + "</li>");
 
 							count = count + 1;
 						});
 
-		$("#platzhalter").empty();
-
-						$("<ul/>", {
-							"class": "my-new-list",
-							html: items.join("")
-						}).appendTo("#platzhalter");
-					});
-				});
-			});
-
-
-			//findet nach ID
-			$(document).ready(function() {
-				$("#btnId").click(function() {
-					var id = $('#inputId').val();
-					var clickUrl = url + "speziesRest/" + id;
-					$.getJSON(clickUrl, function(data) {
-						var items = [];
-						var count = 1;
-
-						// $.each(data, function(key, val) {
-						// 	items.push("<h3>" + count + ". Spezies</h3>")
-						// 	items.push("<li>Spezies: " + val.name + "</li>");
-						//
-						// 	count = count + 1;
-						// });
-
-						items.push("<h3>Spezies: </h3>");
-						items.push("<li>SpeziesID: " + data["id"] + "</li>");
-						items.push("<li>Speziesname: " + data["name"] + "</li>");
+						if(items.length < 1){
+							items.push("<h3>Keine Spezies gefunden!</h3>");
+						}
 
 		$("#platzhalter").empty();
 
@@ -59,25 +45,21 @@
 							"class": "my-new-list",
 							html: items.join("")
 						}).appendTo("#platzhalter");
+						items = [];
 					});
 				});
 			});
-
-
-
-
 	</script>
 </head>
 
 <body>
 
 	<div>
-		<button id="btnAlle">Lade alle Spezies</button>
+		<button id="btnSuchen">Lade Spezies</button>
 	</div>
 	<br />
 	<div>
-		<input id="inputId" type="text" name="ID" placeholder="ID" />
-		<button id="btnId">Lade bestimmte Spezies</button>
+		<input id="inputName" type="text" placeholder="Suchen mit Name" />
 	</div>
 	<div id="platzhalter">
 
