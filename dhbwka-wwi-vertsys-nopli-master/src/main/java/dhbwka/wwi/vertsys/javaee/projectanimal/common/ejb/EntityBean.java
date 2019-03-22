@@ -78,6 +78,17 @@ public abstract class EntityBean<Entity, EntityId> {
     }
 
     /**
+     * Auslesen des Users mit Attribut username
+     *
+     * @param username
+     * @return User
+     */
+    public List<Entity> findUser(String username) {
+        String select = "SELECT e FROM $E e WHERE e.username = :username".replace("$E", this.entityClass.getName());
+        return em.createQuery(select).setParameter("username", username).getResultList();
+    }
+
+    /**
      * Suche nach Tierarten anhand ihrer Bezeichnung, Spezies.Anders als in der
      * Vorlesung behandelt, wird die SELECT-Anfrage hier mit der
      * CriteriaBuilder-API vollkommen dynamisch erzeugt.
