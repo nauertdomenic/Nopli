@@ -6,7 +6,9 @@ import dhbwka.wwi.vertsys.javaee.projectanimal.common.jpa.User;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -17,13 +19,14 @@ import javax.ws.rs.PathParam;
  * Rest für User Login
  */
 @Stateless
-@Path("loginRest/{un}/{pw}")
+@Path("loginRest")
 public class LoginRest {
 
     @EJB
     private UserBean userbean;
 
     @GET
+    @Path("login")
     public String doGet(@PathParam("un") String username, @PathParam("pw") String password) {
         // Login des Users
         List<User> userliste = this.userbean.findUser(username);
@@ -41,5 +44,26 @@ public class LoginRest {
         Gson gson = new Gson();
         String json = gson.toJson(msg);
         return json;
+    }
+
+    public static class SignUpRequest {
+
+        public String username;
+
+        public String password;
+    }
+
+    @POST
+    @Path("login")
+    public StatusResponse doPost(HttpServletRequest request) {
+        // Login des Users
+
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        StatusResponse response = new StatusResponse();
+        response.status = "OK";
+        response.message = "Benutzer wurde angelegt";
+        return response;
+
     }
 }
