@@ -39,4 +39,25 @@ public class LoginRest {
     public void doPost(String inputJsonObj) throws Exception {
         System.out.print(inputJsonObj);
     }
+
+    public static class SignUpRequest {
+
+        public String username;
+
+        public String password;
+    }
+
+    @POST
+    @Path("login")
+    public StatusResponse doPost(HttpServletRequest request) {
+        // Login des Users
+
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        StatusResponse response = new StatusResponse();
+        response.status = "OK";
+        response.message = "Benutzer wurde angelegt";
+        return response;
+
+    }
 }
