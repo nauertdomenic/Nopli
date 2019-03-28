@@ -75,7 +75,7 @@
 
 				var urlParameter = url + urlLogin + username + "/" + passwort;
 
-				$.post( "https://localhost:8443/projectAnimal/RestAPI/loginRest/login", { username: username, password: passwort }, function( data ) {
+				$.post( "https://localhost:8443/projectAnimal/RestAPI/loginRest/", { username: username, password: passwort }, function( data ) {
                     printHTML(); });
 			});
 		});
