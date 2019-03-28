@@ -20,8 +20,12 @@ public class SpeziesListRest {
     private SpeziesBean speziesBean;
 
     @GET
-    public String doGet() {
+    public String doGet(@HeaderParam("username") String username, @HeaderParam("password") String password) {
         // Anzuzeigende Spezies suchen
+        System.out.println("");
+
+        System.out.println(username + " " + password);
+
         List<Spezies> spezies = this.speziesBean.findAll();
         Gson gson = new Gson();
         String json = gson.toJson(spezies);
