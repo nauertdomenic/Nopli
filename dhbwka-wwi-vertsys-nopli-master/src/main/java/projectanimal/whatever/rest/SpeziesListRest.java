@@ -4,7 +4,8 @@ import com.google.gson.Gson;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import projectanimal.whatever.ejb.SpeziesBean;
 import projectanimal.whatever.jpa.Spezies;
 
@@ -27,5 +28,4 @@ public class SpeziesListRest {
         String json = gson.toJson(spezies);
         return json;
     }
-
 }
