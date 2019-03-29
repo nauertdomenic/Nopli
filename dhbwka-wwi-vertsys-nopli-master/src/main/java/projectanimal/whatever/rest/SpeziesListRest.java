@@ -2,6 +2,7 @@ package projectanimal.whatever.rest;
 
 import com.google.gson.Gson;
 import dhbwka.wwi.vertsys.javaee.projectanimal.common.ejb.UserBean;
+import dhbwka.wwi.vertsys.javaee.projectanimal.common.jpa.User;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
@@ -39,15 +40,23 @@ public class SpeziesListRest {
             System.out.println("");
             System.out.println(values[0] + " bla " + values[1]);
 
+            // Error: 0 = kein User; 2 = falsches Passwort
+            List<User> user = userBean.findUser(values[0]);
+            if (user.size() < 1) {
+                return "0";
+            }
+
+            if (user.get(0).checkPassword(values[1])) {
+                List<Spezies> spezies = this.speziesBean.findAll();
+                Gson gson = new Gson();
+                String json = gson.toJson(spezies);
+                return json;
+            } else {
+                return "2";
+            }
         }
 
-        System.out.println("");
-
-        // System.out.println(values[0] + " " + values[1]);
-        List<Spezies> spezies = this.speziesBean.findAll();
-        Gson gson = new Gson();
-        String json = gson.toJson(spezies);
-        return json;
+        return null;
     }
 
 }
