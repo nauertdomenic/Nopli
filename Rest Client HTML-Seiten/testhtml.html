@@ -75,11 +75,23 @@
 
 				var urlParameter = url + urlLogin + username + "/" + passwort;
 
-				$.post( "https://localhost:8443/projectAnimal/RestAPI/loginRest/", { username: username, password: passwort }, function( data ) {
-                    printHTML(); });
-					
-                    
-                  
+
+
+										$(document).ready(function() {
+					        $.ajax({
+					          url: 'http://localhost:8080/projectAnimal/RestAPI/speziesliste',
+					          type: 'GET',
+					          dataType: 'json',
+					          beforeSend: setHeader
+					        });
+					      });
+
+					      function setHeader(xhr) {
+					        xhr.setRequestHeader('username', username);
+					        xhr.setRequestHeader('password', passwort);
+					      }
+
+
 
 			});
 		});
