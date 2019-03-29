@@ -34,9 +34,6 @@
 					urlParameter = url + urlAlle;
 				}
 
-
-
-
 				let response = fetch(urlParameter, {
 					method: "GET",
 					headers: {
@@ -52,7 +49,7 @@
 					data.then(function(temp){
 						var count = 1;
 
-						if(temp == 0){
+						if(temp == 3){
 							items.push("<h3>Kein User gefunden!</h3>");
 							printHTML();
 							return;
